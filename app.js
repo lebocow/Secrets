@@ -32,7 +32,7 @@ app
     res.render("register");
   })
   .post((req, res) => {
-    bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.genSalt(saltRounds, (err, salt) => {
       bcrypt.hash(req.body.password, salt, (err, hash) => {
         const newUser = new User({
           email: req.body.username,
