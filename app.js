@@ -21,21 +21,21 @@ const userSchema = mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-app.route("/").get(function (req, res) {
+app.route("/").get((req, res) => {
   res.render("home");
 });
 
 app
   .route("/register")
-  .get(function (req, res) {
+  .get((req, res) => {
     res.render("register");
   })
-  .post(function (req, res) {
+  .post((req, res) => {
     const newUser = new User({
       email: req.body.username,
       password: md5(req.body.password),
     });
-    newUser.save(function (err) {
+    newUser.save((err) => {
       if (err) {
         res.send(err);
       } else {
@@ -46,14 +46,14 @@ app
 
 app
   .route("/login")
-  .get(function (req, res) {
+  .get((req, res) => {
     res.render("login");
   })
-  .post(function (req, res) {
+  .post((req, res) => {
     const username = req.body.username;
     const password = md5(req.body.password);
 
-    User.findOne({ email: username }, function (err, foundUser) {
+    User.findOne({ email: username }, (err, foundUser) => {
       if (err) {
         res.send(err);
       } else {
